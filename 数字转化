@@ -1,0 +1,36 @@
+#define  _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+int n,m,step,vis[1000];
+bool ans;
+void dfs(int step, long long value) {
+    if (value > m) return;
+    else if (value == m&&!ans) {
+        ans = true;
+        cout << "YES" << endl;
+        cout << n << ' ';
+        for (int i = 1; i <= step-1; i++) {
+            if (vis[i] == 1) {
+                n = n * 10 + 1;
+                cout << n << ' ';
+            }
+            else {
+                n *= 2;
+                cout << n << ' ';
+            }
+        }
+        return;
+    }
+    else {
+        vis[step] = true;//二叉树,vis[]记录分支
+        dfs(step + 1, value * 10 + 1);//一个数能否通过这两种操作转化为另一个数
+        vis[step] = false;
+        dfs(step + 1, value * 2);
+    }
+}
+int main() {
+    cin >> n >> m;
+    dfs(1, n);
+    if (!ans)cout << "NO" << endl;
+    return 0;
+}

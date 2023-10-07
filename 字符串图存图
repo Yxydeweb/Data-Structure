@@ -1,0 +1,10 @@
+#include<iostream>
+using namespace std;
+char map[100][100];
+int n, m;
+int main() {
+    cin >> n;
+    for (int i = 1; i <= n; i++)scanf("%s", map[i] + 1);//存图，行间用空格分开
+    cout << endl;
+    for (int i = 1; i <= n; i++)printf("%s\n", map[i] + 1);
+}

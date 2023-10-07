@@ -1,0 +1,38 @@
+#define  _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+char map[100][100];
+bool vis[100][100];//标记（x,y）格是否被遍历
+int dir[4][2] = { -1,0,1,0,0,-1,0,1 };
+int n, m, k;
+inline bool check(int x, int y) {
+    return x >= 1 && x <= n && y >= 1 && y <= m;
+}
+void dfs(int x, int y) {
+    for (int i = 0; i < 4; i++) {
+        int xx = dir[i][0] + x;
+        int yy = dir[i][1] + y;
+        if (map[xx][yy] == '.' && !vis[xx][yy] && check(xx, yy) && k) {
+            vis[xx][yy] = true;
+            dfs(xx, yy);//递归至叶子结点
+            if (k)k--,map[xx][yy] = 'X';
+        }
+    }
+    
+}
+int main() {
+    cin >> n >> m>>k;
+    for (int i = 1; i <= n; i++) scanf("%s", map[i]+1);
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            if (map[i][j] == '.' && !vis[i][j] && k) {//如果vis[i][j]为true则被遍历过而且为油田,且可能与其他油田相连
+                vis[i][j] = true;
+                dfs(i, j);
+            }
+        }
+    }
+    for (int i = 1; i <= n; i++) {
+        cout << map[i]+1 << endl;
+    }
+    return 0;
+}

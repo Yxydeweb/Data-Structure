@@ -1,0 +1,14 @@
+#define  _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+void Hnod(int n, char a, char b, char c) {
+    if (n == 1)printf("%c->%c\n", a, c);
+    else {
+        Hnod(n-1,a,c,b);
+        printf("%c->%c\n", a, c);
+        Hnod(n - 1, b, a, c);
+    }
+}
+int main() {
+    Hnod(10,'A','B','C');
+}
